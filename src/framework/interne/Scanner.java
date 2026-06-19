@@ -7,16 +7,13 @@ import java.util.List;
 
 public class Scanner {
 
-    /**
-     * Scanne un package et retourne toutes les classes qui possèdent l'annotation fournie.
-     */
     public static List<Class<?>> getClassesAvecAnnotation(String nomPackage, Class<? extends java.lang.annotation.Annotation> annotation) {
         List<Class<?>> classesAnnotees = new ArrayList<>();
         
         try {
             // Convertit le nom du package en chemin de dossier (ex: "com.monapp" -> "com/monapp")
             String chemin = nomPackage.replace('.', '/');
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader(); 
             URL ressource = classLoader.getResource(chemin);
 
             if (ressource == null) {
