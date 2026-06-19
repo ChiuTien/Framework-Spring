@@ -15,4 +15,5 @@ rm sources.txt
 # Crée le fichier .jar à partir du contenu de bin/
 jar cf framework.jar -C bin .
 
-mv framework.jar /opt/Tomcat/webapps/testFramework/WEB-INF/lib/
+cp framework.jar /opt/Tomcat/webapps/testFramework/WEB-INF/lib/
+cp framework.jar /home/chiu/Documents/ITU/L2/S4/"Web Dynamique"/Exo/AppTestFrameworkSpring/lib/
