@@ -26,7 +26,6 @@ public class FrontControllerServlet extends HttpServlet {
             return;
         }
         
-        // On remplit notre liste globale au démarrage
         this.controllersTrouves = Scanner.getClassesAvecAnnotation(packageAConfigurer, Controller.class);
     }
 
