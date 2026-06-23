@@ -16,7 +16,6 @@ import java.util.Map;
 
 public class FrontControllerServlet extends HttpServlet {
 
-    // La clé de la Map sera l'URL (ex: "/accueil") et la valeur sera notre objet Route
     private final Map<String, Route> dictionnaireRoutes = new HashMap<>();
 
     @Override
@@ -28,17 +27,14 @@ public class FrontControllerServlet extends HttpServlet {
             return;
         }
         
-        // 1. Scan des classes
         List<Class<?>> controllers = Scanner.getClassesAvecAnnotation(packageAConfigurer, Controller.class);
         
-        // 2. Remplissage de la Map des routes
         for (Class<?> cls : controllers) {
             for (Method methode : cls.getDeclaredMethods()) {
                 if (methode.isAnnotationPresent(Url.class)) {
                     Url annotationUrl = methode.getAnnotation(Url.class);
                     String cheminUrl = annotationUrl.value();
                     
-                    // On enregistre l'URL et son association dans notre dictionnaire
                     dictionnaireRoutes.put(cheminUrl, new Route(cls, methode));
                 }
             }
@@ -85,7 +81,7 @@ public class FrontControllerServlet extends HttpServlet {
                 out.println("<h1 style='color: red;'>[Framework] 404 - Route introuvable</h1>");
                 out.println("<p>L'URL <code>" + urlDemandee + "</code> n'est associée à aucune méthode.</p>");
                 
-                out.println("<h2>Voici la liste des routes disponibles :</h2>");
+                out.println("");
                 out.println("<table border='1' cellpadding='10' style='border-collapse: collapse;'>");
                 out.println("<tr style='background-color: #eee;'><th>URL</th><th>Classe</th><th>Méthode</th></tr>");
                 
